@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+    <!-- 회원가입 -->
+    <insert id="register">
+    INSERT INTO FL_EMP
+    VALUES(to_char(sysdate,'yymm') || SEQ_FLEMP_NO.NEXTVAL,
+    	  '관리자이름',
+   		  to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
+   		  null,
+   		  null,
+   		  #{empNm},
+   		  #{empEmail},
+   		  #{empPw},
+   		  #{empPhoneNo},
+   		  #{empEmerNo},
+   		  #{empJoinDate},
+   		  #{empSkillLvC},
+   		  #{empPosC})
+    	
+ <!--          INSERT
+            ALL INTO FL_EMP
+        VALUES (SEQ_EMP_NO.NEXTVAL,
+                #{empNo} || SEQ_EMP_EMPNO.NEXTVAL,
+                #{empNm},
+                #{empPw},
+                #{empEmail},
+                #{empPhoneNo},
+                #{empEmerNo},
+                #{empJoinDate},
+                #{pjtLvC},
+                #{pjtPosC})
+        INTO FL_EMP_ADMIN (NO, EMP_NO, EMP_EMAIL, JOIN_DATE, EMP_AUTH)
+        VALUES (SEQ_EMP_NO.CURRVAL, #{empNo} || SEQ_EMP_EMPNO.CURRVAL, #{empEmail}, to_char(sysdate, 'yyyy.mm.dd hh24:mi'), 'EMP')
+        SELECT *
+        FROM dual-->
+    </insert>
+
+    <!-- 로그인 -->
+      <select id="login" statementType="CALLABLE" parameterType="EmpVO" resultType="EmpVO">
+        {
+            CALL P_LOGIN_DATE(to_char(sysdate,'yyyy.mm.dd hh24:mi'),#{empEmail})
+        }
+    </select>
+
+    <!-- 아이디 중복 체크 -->
+    <select id="idChk" resultType="int">
+        SELECT COUNT(*)
+        FROM FL_EMP
+        WHERE EMP_EMAIL = #{empEmail}
+    </select>
+
+    <!-- 비밀번호 변경 -->
+    <update id="update_pw" parameterType="EmpVO">
+        update FL_EMP set EMP_PW = #{empPw} where EMP_EMAIL = #{empEmail}
+    </update>
+
+    <select id="getPw" resultType="String">
+        SELECT EMP_PW
+        FROM FL_EMP
+        WHERE EMP_EMAIL = #{empEmail}
+    </select>
+
+    <!--  회원정보 수정 -->
+ <!--  	<update id="empEdit">
+        MERGE INTO FL_EMP FEMP
+        USING FL_EMP_ADMIN FEADM
+        ON (FEMP.EMP_NO = FEADM.EMP_NO)
+        WHEN MATCHED THEN
+            UPDATE
+            SET FEMP.EMP_NM       = #{empNm},
+                FEMP.EMP_PHONE_NO = #{empPhoneNo},
+                FEMP.EMP_EMER_NO  = #{empEmerNo},
+                FEMP.PJT_POS_C = #{pjtPosC},
+                FEMP.PJT_LV_C  = #{pjtLvC}
+            WHERE FEMP.EMP_NO = FEADM.EMP_NO
+    </update>-->
+
+    <!--  회원정보 수정 -->
+ <!--     <update id="empEdit">
+        MERGE INTO FL_EMP FEMP
+        USING FL_EMP_ADMIN FEADM
+        ON (FEMP.EMP_NO = FEADM.EMP_NO)
+        WHEN MATCHED THEN
+            UPDATE
+            SET FEMP.EMP_NM       = #{empNm},
+                FEMP.EMP_PHONE_NO = #{empPhoneNo},
+                FEMP.EMP_EMER_NO  = #{empEmerNo},
+                FEMP.PJT_POS_C = #{pjtPosC},
+                FEMP.PJT_LV_C  = #{pjtLvC}
+            WHERE FEMP.EMP_NO = #{empNo}
+    </update>-->
+    
+    <!--  회원정보 수정 -->
+    <update id="empEdit">
+        MERGE INTO FL_EMP FEMP
+        USING DUAL
+        ON (FEMP.EMP_NO = #{empNo})
+        WHEN MATCHED THEN
+            UPDATE
+            SET FEMP.EMP_NM       = #{empNm},
+                FEMP.EMP_PHONE_NO = #{empPhoneNo},
+                FEMP.EMP_EMER_NO  = #{empEmerNo},
+                FEMP.PJT_POS_C = #{pjtPosC},
+                FEMP.PJT_LV_C  = #{pjtLvC}
+    </update>    
+    
+    <!-- 유저정보 전체 호출 -->
+    <select id="empShow" parameterType="EmpVO" resultType="EmpVO">
+        SELECT NO            as no,
+               EMP_NO        as empNo,
+               EMP_NM        as empNm,
+               EMP_EMAIL     as empEmail,
+               EMP_PHONE_NO  as empPhoneNo,
+               EMP_EMER_NO   as empEmerNo,
+               EMP_JOIN_DATE as empJoinDate,
+               PJT_POS_C     as pjtPosC,
+               PJT_LV_C      as pjtLvC
+        FROM FL_EMP
+    </select>
+
+    <!--  직원정보 삭제  -->
+    <delete id="deleteEmp" >
+        DELETE
+            FL_EMP
+        WHERE
+            NO = #{no}
+    </delete>
+
+    <delete id="deleteEmpAdmin">
+        DELETE
+            FL_EMP_ADMIN
+        WHERE
+            NO = #{no}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
