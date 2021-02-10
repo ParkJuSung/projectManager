@@ -26,10 +26,10 @@
                         </div>
                         <div class="card-body">
                             <form action="${pageContext.request.contextPath}/user/register" id="regForm" method="post">
-                                <div class=form-group">
+       <!--                           <div class=form-group">
                                     <label class="small mb-1" for="empNo">사원 번호</label>
                                     <input class="form-control py-4" id="empNo" name="empNo" type="text"
-                                           placeholder="사원번호 입력 (YYMM)"/>
+                                           placeholder="사원번호 입력 (YYMM)"/>-->
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1" for="empNm">이름</label>
