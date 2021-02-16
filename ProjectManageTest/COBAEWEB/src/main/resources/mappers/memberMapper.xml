@@ -6,19 +6,25 @@
     <!-- 회원가입 -->
     <insert id="register">
     INSERT INTO FL_EMP
-    VALUES(to_char(sysdate,'yymm') || SEQ_FLEMP_NO.NEXTVAL,
-    	  '관리자이름',
-   		  to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
-   		  null,
-   		  null,
-   		  #{empNm},
-   		  #{empEmail},
-   		  #{empPw},
-   		  #{empPhoneNo},
-   		  #{empEmerNo},
-   		  #{empJoinDate},
-   		  #{empSkillLvC},
-   		  #{empPosC})
+    VALUES(
+   		 SEQ_EMP_NO.NEXTVAL,
+   		 #{orgSeq},
+   		 #{empDivCd},
+   		 #{empId} || SEQ_EMP_NO.NEXTVAL,
+    	 #{empNm},
+    	 #{empPwd},
+    	 #{empEmail},
+    	 #{empPhoneNo},
+   		 #{emerNo},
+   		 #{empJoinDay},
+   		 #{skillLvCd},
+   		 #{posCd},
+   		 #{statCd},
+    	 '등록자사번',
+   		 to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
+   		 null,
+   		 null)
+
     	
  <!--          INSERT
             ALL INTO FL_EMP
@@ -54,13 +60,13 @@
 
     <!-- 비밀번호 변경 -->
     <update id="update_pw" parameterType="EmpVO">
-        update FL_EMP set EMP_PW = #{empPw} where EMP_EMAIL = #{empEmail}
+        update FL_EMP set EMP_PWD = #{empPwd} where EMP_EMAIL = #{empEmail}
     </update>
 
     <select id="getPw" resultType="String">
-        SELECT EMP_PW
+        SELECT EMP_PWD
         FROM FL_EMP
-        WHERE EMP_EMAIL = #{empEmail}
+        WHERE EMP_ID = #{empId}
     </select>
 
     <!--  회원정보 수정 -->
@@ -95,7 +101,7 @@
     
     <!--  회원정보 수정 -->
     <update id="empEdit">
-        MERGE INTO FL_EMP FEMP
+<!--          MERGE INTO FL_EMP FEMP
         USING DUAL
         ON (FEMP.EMP_NO = #{empNo})
         WHEN MATCHED THEN
@@ -104,20 +110,27 @@
                 FEMP.EMP_PHONE_NO = #{empPhoneNo},
                 FEMP.EMP_EMER_NO  = #{empEmerNo},
                 FEMP.PJT_POS_C = #{pjtPosC},
-                FEMP.PJT_LV_C  = #{pjtLvC}
+                FEMP.PJT_LV_C  = #{pjtLvC}-->
     </update>    
     
     <!-- 유저정보 전체 호출 -->
     <select id="empShow" parameterType="EmpVO" resultType="EmpVO">
-        SELECT NO            as no,
-               EMP_NO        as empNo,
+        SELECT EMP_SEQ       as empSeq,
+        	   ORG_SEQ		 as orgSeq,
+        	   EMP_DIV_CD	 as empDivCd,
+               EMP_ID        as empId,
                EMP_NM        as empNm,
                EMP_EMAIL     as empEmail,
                EMP_PHONE_NO  as empPhoneNo,
-               EMP_EMER_NO   as empEmerNo,
-               EMP_JOIN_DATE as empJoinDate,
-               PJT_POS_C     as pjtPosC,
-               PJT_LV_C      as pjtLvC
+               EMER_NO       as emerNo,
+               EMP_JOIN_DAY  as empJoinDay,
+               SKILL_LV_CD   as skillLvCd,
+               POS_CD        as posCd,
+               STAT_CD		 as statCd,
+               REG_ID		 as regId,
+               REG_DT		 as regDt,
+               CHG_ID		 as chgId,
+               CHG_DT		 as chgDt
         FROM FL_EMP
     </select>
 

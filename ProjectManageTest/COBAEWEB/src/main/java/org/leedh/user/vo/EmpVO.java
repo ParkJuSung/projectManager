@@ -17,16 +17,23 @@ public class EmpVO {
    직위코드          pjtPosC;
 */
 
-    private int no;
-    private String empNo;
+    private int empSeq;
+    private int orgSeq;
+    private String empDivCd;
+    private String empId;
     private String empNm;
-    private String empPw;
+    private String empPwd;
     private String empEmail;
     private String empPhoneNo;
-    private String empEmerNo;
-    private String empJoinDate;
-    private String empSkillLvC;
-    private String empPosC;
+    private String emerNo;
+    private String empJoinDay;
+    private String skillLvCd;
+    private String posCd;
+    private String statCd;
+//    private String regId;
+//    private String regDt;
+    private String chgId;
+    private String chgDt;
     private boolean rememberEmail;
 
 }

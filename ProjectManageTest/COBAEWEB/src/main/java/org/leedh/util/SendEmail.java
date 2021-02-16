@@ -26,7 +26,7 @@ public class SendEmail {
             msg += "<h3 style='color: blue;'>";
             msg += empVO.getEmpEmail() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
             msg += "<p>임시 비밀번호 : ";
-            msg += empVO.getEmpPw() + "</p></div>";
+            msg += empVO.getEmpPwd() + "</p></div>";
         }
         // 받는 사람 E-Mail 주소
         String mail = empVO.getEmpEmail();

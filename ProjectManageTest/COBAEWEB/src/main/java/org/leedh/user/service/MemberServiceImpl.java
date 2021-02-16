@@ -31,60 +31,61 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void register(EmpVO vo) throws Exception {
 
-        String empSkillLvC = vo.getEmpSkillLvC();
-        String empPosC = vo.getEmpPosC();
+        String empSkillLvC = vo.getSkillLvCd();
+        String empPosC = vo.getPosCd();
 
         switch (empSkillLvC) {
             case "초급":
-                vo.setEmpSkillLvC("A01");
+            	
+                vo.setSkillLvCd("A01");
                 break;
             case "중하":
-            	vo.setEmpSkillLvC("A02");
+            	vo.setSkillLvCd("A02");
                 break;
             case "중급":
-            	vo.setEmpSkillLvC("A12");
+            	vo.setSkillLvCd("A12");
                 break;
             case "중상":
-            	vo.setEmpSkillLvC("A22");
+            	vo.setSkillLvCd("A22");
                 break;
             case "고급":
-            	vo.setEmpSkillLvC("A03");
+            	vo.setSkillLvCd("A03");
                 break;
             case "특급":
-            	vo.setEmpSkillLvC("A04");
+            	vo.setSkillLvCd("A04");
                 break;
         }
 
         switch (empPosC) {
             case "사원":
-                vo.setEmpPosC("A001");
+                vo.setPosCd("A001");
                 break;
             case "대리":
-                vo.setEmpPosC("A002");
+                vo.setPosCd("A002");
                 break;
             case "주임":
-                vo.setEmpPosC("A003");
+                vo.setPosCd("A003");
                 break;
             case "과장":
-                vo.setEmpPosC("A004");
+                vo.setPosCd("A004");
                 break;
             case "차장":
-                vo.setEmpPosC("A005");
+                vo.setPosCd("A005");
                 break;
             case "부장":
-                vo.setEmpPosC("A006");
+                vo.setPosCd("A006");
                 break;
             case "이사":
-                vo.setEmpPosC("A007");
+                vo.setPosCd("A007");
                 break;
             case "상무":
-                vo.setEmpPosC("A008");
+                vo.setPosCd("A008");
                 break;
             case "전무":
-                vo.setEmpPosC("A009");
+                vo.setPosCd("A009");
                 break;
             case "대표이사":
-                vo.setEmpPosC("A010");
+                vo.setPosCd("A010");
                 break;
         }
 
@@ -132,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
             for (int i = 0; i < 12; i++) {
                 pw += (char) ((Math.random() * 26) + 97);
             }
-            vo.setEmpPw(pw);
+            vo.setEmpPwd(pw);
 
             // 비밀번호 변경
             dao.update_pw(vo);

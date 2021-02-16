@@ -30,13 +30,13 @@
                                       method="post">
 
                                     <div class="form-group">
-                                        <label class="small mb-1" for="empEmail">이메일</label>
-                                        <input class="form-control py-4" id="empEmail" name="empEmail" type="email"
-                                               placeholder="이메일을 입력하세요."/>
+                                        <label class="small mb-1" for="empEmail">사원(ID)번호</label>
+                                        <input class="form-control py-4" id="empEmail" name="empEmail" type="text"
+                                               placeholder="사번을 입력하세요."/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="small mb-1" for="empPw">비밀번호</label>
-                                        <input class="form-control py-4" id="empPw" name="empPw" type="password"
+                                        <label class="small mb-1" for="empPwd">비밀번호</label>
+                                        <input class="form-control py-4" id="empPwd" name="empPwd" type="password"
                                                placeholder="비밀번호를 입력하세요."/>
                                     </div>
                                     <div class="form-group">

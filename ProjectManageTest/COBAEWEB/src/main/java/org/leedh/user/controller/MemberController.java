@@ -67,9 +67,9 @@ public class MemberController {
             if (result == 1) {
                 return "redirect:/user/register";
             } else if (result == 0) {
-                String inputPass = vo.getEmpPw();
+                String inputPass = vo.getEmpPwd();
                 String pwd = pwdEncoder.encode(inputPass);
-                vo.setEmpPw(pwd);
+                vo.setEmpPwd(pwd);
                 service.register(vo);
             }
             // 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기
@@ -92,12 +92,12 @@ public class MemberController {
         String pw = dao.getPw(id);
         log.info("암호화 비밀번호 :" + pw);
 
-        String rawPw = vo.getEmpPw();
+        String rawPw = vo.getEmpPwd();
         log.info("입력된 비밀번호: " + rawPw);
 
         if (pwdEncoder.matches(rawPw, pw)) {
             log.info("비밀번호 일치");
-            service.login(vo);
+    //        service.login(vo);
             session.setAttribute("email", id);
             session.setAttribute("name", vo.getEmpNm());
         } else {

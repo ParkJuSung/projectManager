@@ -12,136 +12,76 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Focusleader Project Manager</title>
+ <!--     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />-->
+  <!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>   -->
+  
+	<link href="/resources/plugin/css/jquery-ui.css" rel="stylesheet" />
+	<link href="/resources/plugin/css/jquery-ui.structure.css" rel="stylesheet" />
+	<link href="/resources/plugin/css/jquery-ui.theme.css" rel="stylesheet" />
+
+    <script src="/resources/plugin/lib/jquery.dataTables.min.js"></script>
+    <script src="/resources/plugin/js/jquery.jqGrid.min.js"></script>
+    <script src="/resources/plugin/js/grid.locale-kr.js"></script>
+    
 </head>
-<body class="sb-nav-fixed">
-
-<!-- 상단 메뉴 부분 -->
-<c:import url="/WEB-INF/views/include/top.jsp"/>
-
-<div id="layoutSidenav">
-
-    <!-- 사이드 메뉴 부분 -->
-    <c:import url="/WEB-INF/views/include/side.jsp"/>
-
-    <div id="layoutSidenav_content">
-
-        <main>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    직원정보
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <td><b><input id="allCheck" type="checkbox" name="allCheck"/></b></td>
-                                <td><b>사번</b></td>
-                                <td><b>이름</b></td>
-                                <td><b>이메일</b></td>
-                                <td><b>핸드폰 번호</b></td>
-                                <td><b>비상 연락처</b></td>
-                                <td><b>입사일</b></td>
-                                <td><b>기술 등급</b></td>
-                                <td><b>직위</b></td>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach var="empList" items="${empList}" varStatus="vs">
-                                <tr onclick="empOpenChild('${empList.empNo}',
-                                		'${empList.empNm}',
-                                        '${empList.empEmail}',
-                                        '${empList.empPhoneNo}',
-                                        '${empList.empEmerNo}',
-                                        '${empList.empJoinDate}',
-                                        '${empList.pjtPosC}',
-                                        '${empList.pjtLvC}');"
-                                    onmouseover="this.style.backgroundColor='#9FB6FF'"
-                                    onmouseout="this.style.backgroundColor=''"
-                                    style="cursor:pointer">
-
-                                    <td class="checkbox" onclick="event.cancelBubble=true;">
-                                        <input class="" name="RowCheck" type="checkbox" value="${empList.no}"/>
-                                    </td>
-                                    <td><c:out value="${empList.empNo}"/></td>
-                                    <td><c:out value="${empList.empNm}"/></td>
-                                    <td><c:out value="${empList.empEmail}"/></td>
-                                    <td><c:out value="${empList.empPhoneNo}"/></td>
-                                    <td><c:out value="${empList.empEmerNo}"/></td>
-                                    <td><c:out value="${empList.empJoinDate}"/></td>
-                                    <c:choose>
-                                        <c:when test="${empList.pjtLvC == 'A01'}">
-                                            <td>초급</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtLvC == 'A02'}">
-                                            <td>중하</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtLvC == 'A12'}">
-                                            <td>중</td>
-                                        </c:when>                                        
-                                        <c:when test="${empList.pjtLvC == 'A22'}">
-                                            <td>중상</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtLvC == 'A03'}">
-                                            <td>고급</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtLvC == 'A04'}">
-                                            <td>특급</td>
-                                        </c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${empList.pjtPosC  == 'A001'}">
-                                            <td>사원</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A002'}">
-                                            <td>주임</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A003'}">
-                                            <td>대리</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A004'}">
-                                            <td>과장</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A005'}">
-                                            <td>차장</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A006'}">
-                                            <td>부장</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A007'}">
-                                            <td>이사</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A008'}">
-                                            <td>상무</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A009'}">
-                                            <td>전무</td>
-                                        </c:when>
-                                        <c:when test="${empList.pjtPosC  == 'A010'}">
-                                            <td>대표이사</td>
-                                        </c:when>
-                                    </c:choose>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <div>
-                            <p>직원 정보 수정 시 테이블을 클릭해주세요</p>
-                            <input type="button" value="삭제" class="btn btn-primary" onclick="empDeleteValue()">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-
-        <!-- 하단 사이드 메뉴 부분 -->
-        <c:import url="/WEB-INF/views/include/bottom.jsp"/>
-
-    </div>
-</div>
+<body>
+	<table id="jqGrid"></table> 
+	<div id="gridpager"></div>
 
 </body>
+
+<script>
+
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+
+var dataArr = [ {ID:"1",javascript:"80",python:"60",jsp:"50"}, 
+	{ID:"2",javascript:"57",python:"80",jsp:"50"}, 
+	{ID:"3",javascript:"90",python:"40",jsp:"85"},
+	{ID:"4",javascript:"67",python:"84",jsp:"76"}, 
+	{ID:"5",javascript:"35",python:"83",jsp:"85"},
+	{ID:"6",javascript:"90",python:"67",jsp:"56"},
+	{ID:"7",javascript:"80",python:"60",jsp:"50"}, 
+	{ID:"8",javascript:"45",python:"67",jsp:"100"}, 
+	{ID:"9",javascript:"90",python:"40",jsp:"68"}, 
+	{ID:"10",javascript:"67",python:"57",jsp:"76"},
+	{ID:"11",javascript:"36",python:"83",jsp:"35"}, 
+	{ID:"12",javascript:"76",python:"35",jsp:"98"}, ]; 
+	$("#jqGrid").jqGrid({ 
+		datatype: "local", 
+		data: dataArr, 
+		height: 250, 
+		width: 500, 
+		colNames : ['ID','자바스크립트','파이썬','JSP'], 
+		colModel:[ 
+			{name:"ID", index:"ID", width:15, align:'center', hidden:false }, 
+			{name : 'javascript', index : 'javascript', width : 70, align : 'left', hidden:false, }, 
+			{name : 'python', index : 'python', width : 70, align : 'center', hidden:false }, 
+			{name : 'jsp', index : 'jsp', width : 70, resizable : true, align : 'right', hidden:false }], 
+			loadtext: "로딩중일때 표시되는 텍스트!", 
+			caption: "jQuery Grid: jqGrid 샘플", 
+			pager:"#gridpager",
+			rowNum:5, 
+			//rownumbers:true, 
+			//viewrecords:true,
+			//pgbuttons:true, 
+			//pginput:true, 
+			//shrinkToFit:true, 
+			//sortable: false, 
+			//loadComplete:function(data){}, 
+			//scroll:true, 
+			//loadonce:false, 
+			//hidegrid:true 
+	});
+
+
+
+</script>
 </html>
