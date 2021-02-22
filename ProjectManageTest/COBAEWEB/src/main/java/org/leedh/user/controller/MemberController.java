@@ -8,17 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Enumeration;
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -167,21 +173,69 @@ public class MemberController {
         return result;
     }
 
+    
     //사원 전체 정보 불러오기
+    
+ //   @ResponseBody
     @RequestMapping(value = "/empShow", method = RequestMethod.GET)
-    public String empShow(Model model) throws Exception {
-
+    public Model empShow(Model model1) throws Exception {
+    //public String empShow(Model model) throws Exception {
+    	
+    	
+    	
+    	Model retModel = model1;
+    	
+    	System.out.println("/empShow start");
+    	
         List<EmpVO> empVo = service.empShow();
-
-        model.addAttribute("empList", empVo);
-
-        return "/user/empShow";
+        
+        
+        model1.addAttribute("empList", empVo);
+        
+   
+    	System.out.println("/empShow end" + model1);
+        return retModel;
+        //return "/user/empShow";
     }
+    
+    
+   // @ResponseBody
+    @RequestMapping(value = "/empShow", method = RequestMethod.POST)
+    public ModelAndView  empShowTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	
+    	System.out.println("run /empShow : " + this.getClass().getName());
 
+
+    ModelAndView mav = new ModelAndView("jsonView");
+    List<EmpVO> empList = null;
+    EmpVO empVo = new EmpVO();
+
+    try {
+    	empList = (List<EmpVO>) service.empShow();
+
+        if (empList == null) {
+            mav.addObject("result", "1");
+        } else {
+            mav.addObject("result", "0");
+            mav.addObject("records", empList.size());
+            mav.addObject("rows", empList);
+        }
+
+    } catch (Exception e) {
+    	System.out.println(this.getClass().getName() + " --> Select Error.");
+    	System.out.println(this.getClass().getName() + " Select Error." + e.getMessage());
+    }
+    
+	System.out.println(this.getClass().getName() + " Result --> " + mav);
+	
+	return mav;
+    }
+    
     // 사원 정보 삭제
     @RequestMapping(value = "/empDelete", method = RequestMethod.GET)
     public String delete(String no) throws Exception {
-
+    	
+    	
         service.deleteEmpAdmin(no);
         service.deleteEmp(no);
         return "redirect:/user/empShow";
@@ -190,7 +244,8 @@ public class MemberController {
     // 사원 정보 선택삭제
     @RequestMapping(value = "/empDelete")
     public String checkDelete(HttpServletRequest request) throws Exception {
-
+    	
+    	
         String[] ajaxMsg = request.getParameterValues("valueArr");
 
         for (String s : ajaxMsg) {

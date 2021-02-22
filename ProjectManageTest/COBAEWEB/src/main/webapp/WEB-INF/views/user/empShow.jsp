@@ -25,63 +25,39 @@
     
 </head>
 <body>
+<!--  <form action="${pageContext.request.contextPath}/user/empShow" method="post">
 	<table id="jqGrid"></table> 
 	<div id="gridpager"></div>
+</form>-->
 
 </body>
 
-<script>
+<script type="text/javascript">
 
-jQuery.browser = {};
-(function () {
-    jQuery.browser.msie = false;
-    jQuery.browser.version = 0;
-    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-        jQuery.browser.msie = true;
-        jQuery.browser.version = RegExp.$1;
-    }
-})();
-
-var dataArr = [ {ID:"1",javascript:"80",python:"60",jsp:"50"}, 
-	{ID:"2",javascript:"57",python:"80",jsp:"50"}, 
-	{ID:"3",javascript:"90",python:"40",jsp:"85"},
-	{ID:"4",javascript:"67",python:"84",jsp:"76"}, 
-	{ID:"5",javascript:"35",python:"83",jsp:"85"},
-	{ID:"6",javascript:"90",python:"67",jsp:"56"},
-	{ID:"7",javascript:"80",python:"60",jsp:"50"}, 
-	{ID:"8",javascript:"45",python:"67",jsp:"100"}, 
-	{ID:"9",javascript:"90",python:"40",jsp:"68"}, 
-	{ID:"10",javascript:"67",python:"57",jsp:"76"},
-	{ID:"11",javascript:"36",python:"83",jsp:"35"}, 
-	{ID:"12",javascript:"76",python:"35",jsp:"98"}, ]; 
-	$("#jqGrid").jqGrid({ 
-		datatype: "local", 
-		data: dataArr, 
-		height: 250, 
-		width: 500, 
-		colNames : ['ID','자바스크립트','파이썬','JSP'], 
-		colModel:[ 
-			{name:"ID", index:"ID", width:15, align:'center', hidden:false }, 
-			{name : 'javascript', index : 'javascript', width : 70, align : 'left', hidden:false, }, 
-			{name : 'python', index : 'python', width : 70, align : 'center', hidden:false }, 
-			{name : 'jsp', index : 'jsp', width : 70, resizable : true, align : 'right', hidden:false }], 
-			loadtext: "로딩중일때 표시되는 텍스트!", 
-			caption: "jQuery Grid: jqGrid 샘플", 
-			pager:"#gridpager",
-			rowNum:5, 
-			//rownumbers:true, 
-			//viewrecords:true,
-			//pgbuttons:true, 
-			//pginput:true, 
-			//shrinkToFit:true, 
-			//sortable: false, 
-			//loadComplete:function(data){}, 
-			//scroll:true, 
-			//loadonce:false, 
-			//hidegrid:true 
-	});
+var url = "/user/empShow";
 
 
+$(document).ready(function() {
+	 $.ajax({
+		url: url,
+		dataType: 'json',
+		type : 'POST',
+		success : function(data) {
+			alert("Success!!!!");
+			alert(JSON.stringify(data));
+			console.log(data);
+       },
+       error : function(request, status, error) {
+           alert("에러가 발생했습니다. 관리자에게 문의하시기 바랍니다");
+           alert(request.status,status);
+           //zAjax.fn_error('getTest.do', request, status, error);
+       }
+	})
+	
 
+		
+});
+	
 </script>
+
 </html>

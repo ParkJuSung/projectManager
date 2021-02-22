@@ -29,7 +29,12 @@
     <beans:bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <beans:property name="dataSource" ref="dataSource"/>
     </beans:bean>
+	
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	    <beans:property name="contentType" value="application/json;charset=UTF-8"></beans:property>
+	</beans:bean>
 
+	
     <!-- transaction annotation -->
     <tx:annotation-driven proxy-target-class="true"/>
 
