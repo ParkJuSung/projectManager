@@ -5,6 +5,7 @@ import org.leedh.user.dao.MemberDAO;
 import org.leedh.user.service.MemberService;
 import org.leedh.user.vo.EmpVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ import java.util.Enumeration;
 @RequestMapping("/user")
 @Slf4j
 public class MemberController {
+	
 
     private final MemberService service;
     private final MemberDAO dao;
