@@ -15,17 +15,18 @@
  <!--     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />-->
   <!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>   -->
   
-	<link href="/resources/plugin/css/jquery-ui.css" rel="stylesheet" />
-	<link href="/resources/plugin/css/jquery-ui.structure.css" rel="stylesheet" />
-	<link href="/resources/plugin/css/jquery-ui.theme.css" rel="stylesheet" />
+	<link href="/resources/plugin/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/plugin/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
+	<!--  <link href="/resources/plugin/css/jquery-ui.structure.css" rel="stylesheet" />-->
+	<!--  <link href="/resources/plugin/css/jquery-ui.theme.css" rel="stylesheet" />-->
 
-    <script src="/resources/plugin/lib/jquery.dataTables.min.js"></script>
-    <script src="/resources/plugin/js/jquery.jqGrid.min.js"></script>
-    <script src="/resources/plugin/js/grid.locale-kr.js"></script>
+    <!--  <script type="text/javascript" src="/resources/plugin/lib/jquery.dataTables.min.js"></script> -->
+   	<!--  <script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid.min.js"></script>-->
+    <script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid.src.js"></script> 
+    <script type="text/javascript" src="/resources/plugin/js/grid.locale-kr.js"></script> 
     
 </head>
 <body>
-  <form action="${pageContext.request.contextPath}/user/empShow" method="post">
 	<table id="jqGrid"></table> 
 	<div id="gridpager"></div>
 </form>
@@ -36,83 +37,69 @@
 
 var url = '/user/empShow';
 
-jQuery.browser = {};
-(function () {
-    jQuery.browser.msie = false;
-    jQuery.browser.version = 0;
-    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-        jQuery.browser.msie	 = true;
-        jQuery.browser.version = RegExp.$1;
-    }
-})();
-
-
 $(document).ready(function() {
+	jQuery.browser = {};
+	(function () {
+	    jQuery.browser.msie = false;
+	    jQuery.browser.version = 0;
+	    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+	        jQuery.browser.msie = true;
+	        jQuery.browser.version = RegExp.$1;
+	    }
+	})();
+	
 	 $.ajax({
 		url: url,
 		dataType: 'json',
-		type : 'post',
+		type : 'POST',
 		success : function(data) {
-			alert("Success!!!!");
-			console.log(data);
-			console.log(data.rows[0].emerNo);
+		//	alert("Success!!!!");
+		//	console.log(data);
+		//	console.log(data.rows[0].emerNo);
+			fn_listSuccess(data);
        },
        error : function(request, status, error) {
            alert("에러가 발생했습니다. 관리자에게 문의하시기 바랍니다");
-           alert(request);
-           console.log(request);
+       //    alert(request);
+       //    console.log(request);
            alert(request.status,status);
            //zAjax.fn_error('getTest.do', request, status, error);
        }
 	})
 	
-		$("#jqGrid").jqGrid({ 
-				url: url,
-				dataType: "json",
-				jsonReader:{
-					root: "rows",
-					page: "page",
-					total: "total",
-					recodes: "records",
-					repeatitems : false,
-					id: "id"
-				},
-				mtype: 'post',
-				height: 250, 
-				width: 1000, 
-				colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo','emerNo','empJoinDay','skillLvCd','posCd','statCd','chgid','chgDt'], 
-				colModel:[ 
-					{name:'empSeq', index:'empSeq', width:15, align:'center', hidden:false }, 
-					{name:'orgSeq', index:'orgSeq', width:15, align:'center', hidden:false },
-					{name:'empDivCd', index:'empDivCd', width:15, align:'center', hidden:false },
-					{name:'empId', index:'empId', width:15, align:'center', hidden:false },
-					{name:'empNm', index:'empNm', width:15, align:'center', hidden:false },
-					{name:'empEail', index:'empEail', width:15, align:'center', hidden:false },
-					{name:'empPhoneNo', index:'empPhoneNo', width:15, align:'center', hidden:false },
-					{name:'emerNo', index:'emerNo', width:15, align:'center', hidden:false },
-					{name:'empJoinDay', index:'empJoinDay', width:15, align:'center', hidden:false },
-					{name:'skillLvCd', index:'skillLvCd', width:15, align:'center', hidden:false },
-					{name:'posCd', index:'posCd', width:15, align:'center', hidden:false },
-					{name:'statCd', index:'statCd', width:15, align:'center', hidden:false },
-					{name:'chgid', index:'chgid', width:15, align:'center', hidden:false },
-					{name:'chgDt', index:'chgDt', width:15, align:'center', hidden:false }],
-					rowNum:5, 
-					autoWidth: true,
-					sortname: 'id',
-					gridview: true,
-					multiselect: true,
-					sortable: true,
-					height:"auto",
-					loadtext: "로딩중일때 표시되는 텍스트!", 
-					caption: "jQuery Grid: jqGrid 샘플", 
-					pager:"#gridpager",
-					jsonReader : { repeatitems: false},
-					
-			});
-	
+	function fn_listSuccess(data){
+		 var dataArr = data.rows;
+		 console.log(dataArr);
+				$("#jqGrid").jqGrid({ 
+					datatype: "local", 
+					data: dataArr, 
+					height: 250, 
+					width: 1050, 
+					colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo','emerNo','empJoinDay','skillLvCd','posCd','statCd','chgid','chgDt'], 
+					colModel:[ 
+						{name:"empSeq", index:"empSeq", width:40, align:'left', hidden:false }, 
+						{name : 'orgSeq', index : 'orgSeq', width : 15, align : 'left', hidden:false, },
+						{name:'empDivCd', index:'empDivCd', width:20, align:'left', hidden:false },
+						{name:'empId', index:'empId', width:35, align:'left', hidden:false },
+						{name:'empNm', index:'empNm', width:50, align:'left', hidden:false },
+						{name:'empEmail', index:'empEmail', width:70, align:'left', hidden:false },
+						{name:'empPhoneNo', index:'empPhoneNo', width:60, align:'left', hidden:false },
+						{name:'emerNo', index:'emerNo', width:60, align:'left', hidden:false },
+						{name:'empJoinDay', index:'empJoinDay', width:55, align:'left', hidden:false },
+						{name:'skillLvCd', index:'skillLvCd', width:40, align:'left', hidden:false },
+						{name:'posCd', index:'posCd', width:40, align:'left', hidden:false },
+						{name:'statCd', index:'statCd', width:15, align:'left', hidden:false },
+						{name:'chgid', index:'chgid', width:25, align:'left', hidden:false },
+						{name:'chgDt', index:'chgDt', width:25, align:'left', hidden:false }],
+						loadtext: "로딩중일때 표시되는 텍스트!", 
+						caption: "직원 목록", 
+						pager:"#gridpager",
+						rowNum:5, 
+				});
+	 }
+		});
 
-		
-});
+
 	
 </script>
 
