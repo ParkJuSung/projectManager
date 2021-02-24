@@ -12,19 +12,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Focusleader Project Manager</title>
- <!--     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />-->
-  <!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>   -->
-  
-	<link href="/resources/plugin/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-	<link href="/resources/plugin/css/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
-	<!--  <link href="/resources/plugin/css/jquery-ui.structure.css" rel="stylesheet" />-->
-	<!--  <link href="/resources/plugin/css/jquery-ui.theme.css" rel="stylesheet" />-->
-
-    <!--  <script type="text/javascript" src="/resources/plugin/lib/jquery.dataTables.min.js"></script> -->
-   	<!--  <script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid.min.js"></script>-->
-    <script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid.src.js"></script> 
-    <script type="text/javascript" src="/resources/plugin/js/grid.locale-kr.js"></script> 
-    
+      
 </head>
 <body class="sb-nav-fixed">
 
@@ -100,20 +88,20 @@ $(document).ready(function() {
 					width: 1200, 
 					colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo','emerNo','empJoinDay','skillLvCd','posCd','statCd','chgid','chgDt'], 
 					colModel:[ 
-						{name:"empSeq", index:"empSeq", width:45, align:'left', hidden:false }, 
-						{name : 'orgSeq', index : 'orgSeq', width : 40, align : 'center', hidden:false, },
-						{name:'empDivCd', index:'empDivCd', width:50, align:'center', hidden:false },
-						{name:'empId', index:'empId', width:65, align:'left', hidden:false },
-						{name:'empNm', index:'empNm', width:50, align:'left', hidden:false },
-						{name:'empEmail', index:'empEmail', width:150, align:'left', hidden:false },
-						{name:'empPhoneNo', index:'empPhoneNo', width:80, align:'center', hidden:false },
-						{name:'emerNo', index:'emerNo', width:80, align:'center', hidden:false },
+						{name:"empSeq", index:"empSeq", width:55, align:'left', hidden:false }, 
+						{name : 'orgSeq', index : 'orgSeq', width : 55, align : 'left', hidden:false, },
+						{name:'empDivCd', index:'empDivCd', width:65, align:'left', hidden:false },
+						{name:'empId', index:'empId', width:70, align:'left', hidden:false },
+						{name:'empNm', index:'empNm', width:60, align:'center', hidden:false },
+						{name:'empEmail', index:'empEmail', width:150, align:'center', hidden:false },
+						{name:'empPhoneNo', index:'empPhoneNo', width:90, align:'center', hidden:false },
+						{name:'emerNo', index:'emerNo', width:90, align:'center', hidden:false },
 						{name:'empJoinDay', index:'empJoinDay', width:70, align:'center', hidden:false },
-						{name:'skillLvCd', index:'skillLvCd', width:40, align:'center', hidden:false },
-						{name:'posCd', index:'posCd', width:40, align:'center', hidden:false },
-						{name:'statCd', index:'statCd', width:35, align:'center', hidden:false },
-						{name:'chgid', index:'chgid', width:35, align:'center', hidden:false },
-						{name:'chgDt', index:'chgDt', width:35, align:'center', hidden:false }],
+						{name:'skillLvCd', index:'skillLvCd', width:55, align:'center', hidden:false },
+						{name:'posCd', index:'posCd', width:45, align:'center', hidden:false },
+						{name:'statCd', index:'statCd', width:50, align:'center', hidden:false },
+						{name:'chgid', index:'chgid', width:45, align:'center', hidden:false },
+						{name:'chgDt', index:'chgDt', width:45, align:'left', hidden:false }],
 						loadtext: "로딩중일때 표시되는 텍스트!", 
 						caption: "직원 목록", 
 						pager:"#gridpager",
