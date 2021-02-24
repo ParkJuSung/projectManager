@@ -26,11 +26,34 @@
     <script type="text/javascript" src="/resources/plugin/js/grid.locale-kr.js"></script> 
     
 </head>
-<body>
-	<table id="jqGrid"></table> 
-	<div id="gridpager"></div>
-</form>
+<body class="sb-nav-fixed">
 
+<!-- 상단 메뉴 부분 -->
+<c:import url="/WEB-INF/views/include/top.jsp"/>
+
+<div id="layoutSidenav">
+
+    <!-- 사이드 메뉴 부분 -->
+    <c:import url="/WEB-INF/views/include/side.jsp"/>
+
+    <div id="layoutSidenav_content">
+
+        <main>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    직원정보
+                </div>
+                <div class="card-body">
+					<table id="jqGrid"></table> 
+					<div id="gridpager"></div>
+                </div>
+            </div>
+        </main>
+        <!-- 하단 사이드 메뉴 부분 -->
+        <c:import url="/WEB-INF/views/include/bottom.jsp"/>
+    </div>
+</div>
 </body>
 
 <script type="text/javascript">
@@ -73,28 +96,28 @@ $(document).ready(function() {
 				$("#jqGrid").jqGrid({ 
 					datatype: "local", 
 					data: dataArr, 
-					height: 250, 
-					width: 1050, 
+					height: 500, 
+					width: 1200, 
 					colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo','emerNo','empJoinDay','skillLvCd','posCd','statCd','chgid','chgDt'], 
 					colModel:[ 
-						{name:"empSeq", index:"empSeq", width:40, align:'left', hidden:false }, 
-						{name : 'orgSeq', index : 'orgSeq', width : 15, align : 'left', hidden:false, },
-						{name:'empDivCd', index:'empDivCd', width:20, align:'left', hidden:false },
-						{name:'empId', index:'empId', width:35, align:'left', hidden:false },
+						{name:"empSeq", index:"empSeq", width:45, align:'left', hidden:false }, 
+						{name : 'orgSeq', index : 'orgSeq', width : 40, align : 'center', hidden:false, },
+						{name:'empDivCd', index:'empDivCd', width:50, align:'center', hidden:false },
+						{name:'empId', index:'empId', width:65, align:'left', hidden:false },
 						{name:'empNm', index:'empNm', width:50, align:'left', hidden:false },
-						{name:'empEmail', index:'empEmail', width:70, align:'left', hidden:false },
-						{name:'empPhoneNo', index:'empPhoneNo', width:60, align:'left', hidden:false },
-						{name:'emerNo', index:'emerNo', width:60, align:'left', hidden:false },
-						{name:'empJoinDay', index:'empJoinDay', width:55, align:'left', hidden:false },
-						{name:'skillLvCd', index:'skillLvCd', width:40, align:'left', hidden:false },
-						{name:'posCd', index:'posCd', width:40, align:'left', hidden:false },
-						{name:'statCd', index:'statCd', width:15, align:'left', hidden:false },
-						{name:'chgid', index:'chgid', width:25, align:'left', hidden:false },
-						{name:'chgDt', index:'chgDt', width:25, align:'left', hidden:false }],
+						{name:'empEmail', index:'empEmail', width:150, align:'left', hidden:false },
+						{name:'empPhoneNo', index:'empPhoneNo', width:80, align:'center', hidden:false },
+						{name:'emerNo', index:'emerNo', width:80, align:'center', hidden:false },
+						{name:'empJoinDay', index:'empJoinDay', width:70, align:'center', hidden:false },
+						{name:'skillLvCd', index:'skillLvCd', width:40, align:'center', hidden:false },
+						{name:'posCd', index:'posCd', width:40, align:'center', hidden:false },
+						{name:'statCd', index:'statCd', width:35, align:'center', hidden:false },
+						{name:'chgid', index:'chgid', width:35, align:'center', hidden:false },
+						{name:'chgDt', index:'chgDt', width:35, align:'center', hidden:false }],
 						loadtext: "로딩중일때 표시되는 텍스트!", 
 						caption: "직원 목록", 
 						pager:"#gridpager",
-						rowNum:5, 
+						rowNum:20, 
 				});
 	 }
 		});
