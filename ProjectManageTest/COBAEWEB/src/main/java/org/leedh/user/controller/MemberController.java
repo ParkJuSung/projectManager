@@ -135,7 +135,7 @@ public class MemberController {
             return "redirect:/";
         }
 
-        return "user/empEdit";
+        return "/user/empEdit";
     }
 
     // 회원정보 수정  post
@@ -152,8 +152,8 @@ public class MemberController {
         service.empEdit(vo);
         model.addAttribute("empEdit", vo);
         
-       
-        return "/";
+        
+        return "/user/empEdit";
     }
 
     // 비밀번호 찾기 폼
@@ -237,7 +237,7 @@ public class MemberController {
     public String delete(String no) throws Exception {
     	
     	
-        service.deleteEmpAdmin(no);
+       // service.deleteEmpAdmin(no);
         service.deleteEmp(no);
         return "redirect:/user/empShow";
     }

@@ -50,7 +50,7 @@
 
 <script type="text/javascript">
 
-var url = '/user/empShow';
+
 
 $(document).ready(function() {
 	jQuery.browser = {};
@@ -66,9 +66,9 @@ $(document).ready(function() {
 		//단순히 그리드 그리기
 			$("#jqGrid").jqGrid({ 
 				height: 500, 
-				width: 1275, 
+				width: 1450, 
 				colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo',
-						  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgid','chgDt'],					
+						  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgId','chgDt'],					
 				colModel:[ 
 				{name:"empSeq", index:"empSeq", width:55, align:'left', hidden:false }, 
 				{name:'orgSeq', index : 'orgSeq', width : 55, align : 'left', hidden:false, },
@@ -82,10 +82,10 @@ $(document).ready(function() {
 				{name:'skillLvCd', index:'skillLvCd', width:55, align:'center', hidden:false },
 				{name:'posCd', index:'posCd', width:45, align:'center', hidden:false },
 				{name:'statCd', index:'statCd', width:50, align:'center', hidden:false },
-				{name:'regId', index:'regId', width:75, align:'center', hidden:false },
-				{name:'regDt', index:'regDt', width:75, align:'center', hidden:false },
-				{name:'chgid', index:'chgid', width:45, align:'center', hidden:false },
-				{name:'chgDt', index:'chgDt', width:45, align:'left', hidden:false }],
+				{name:'regId', index:'regId', width:90, align:'center', hidden:false },
+				{name:'regDt', index:'regDt', width:90, align:'center', hidden:false },
+				{name:'chgId', index:'chgId', width:90, align:'center', hidden:false },
+				{name:'chgDt', index:'chgDt', width:90, align:'left', hidden:false }],
 					loadtext: "로딩중일때 표시되는 텍스트!", 
 					caption: "직원 목록", 
 					pager:"#gridpager",
@@ -95,6 +95,8 @@ $(document).ready(function() {
 });
 
 function selectData(){
+	
+	var url = '/user/empShow';
 	
 	//값가져오기
 	 $.ajax({
@@ -125,9 +127,9 @@ function selectData(){
 					datatype: "local", 
 					data: dataArr, 
 					height: 500, 
-					width: 1275, 
+					width: 1450, 
 					colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo',
-							  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgid','chgDt'], 
+							  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgId','chgDt'], 
 					colModel:[ 
 						{name:"empSeq", index:"empSeq", width:55, align:'left', hidden:false }, 
 						{name : 'orgSeq', index : 'orgSeq', width : 55, align : 'left', hidden:false, },
@@ -141,15 +143,29 @@ function selectData(){
 						{name:'skillLvCd', index:'skillLvCd', width:55, align:'center', hidden:false },
 						{name:'posCd', index:'posCd', width:45, align:'center', hidden:false },
 						{name:'statCd', index:'statCd', width:50, align:'center', hidden:false },
-						{name:'regId', index:'regId', width:75, align:'center', hidden:false },
-						{name:'regDt', index:'regDt', width:75, align:'center', hidden:false },
-						{name:'chgid', index:'chgid', width:45, align:'center', hidden:false },
-						{name:'chgDt', index:'chgDt', width:45, align:'left', hidden:false }],
+						{name:'regId', index:'regId', width:90, align:'center', hidden:false },
+						{name:'regDt', index:'regDt', width:90, align:'center', hidden:false },
+						{name:'chgId', index:'chgId', width:90, align:'center', hidden:false },
+						{name:'chgDt', index:'chgDt', width:90, align:'left', hidden:false }],
 						loadtext: "로딩중일때 표시되는 텍스트!", 
 						caption: "직원 목록", 
 						pager:"#gridpager",
 						rowNum:15, 
 						multiselect: true,
+						cellEdit:true,
+						onCellSelect: function(rowId,colId,cellContent,e){
+							//alert("rowID : " + rowId);
+							//alert("colId : " + colId);
+							
+							if(colId!=0)
+							{
+								var rowData = $("#jqGrid").jqGrid('getRowData',rowId);
+								console.log(rowData);
+								empOpenChild(rowData.orgSeq,rowData.empNm,rowData.empId,rowData.empEmail,
+										    rowData.empPhoneNo,rowData.emerNo,rowData.empJoinDay,
+										    rowData.skillLvCd,rowData.empDivCd,rowData.posCd,rowData.statCd);
+							}
+						},
 				});
 	 }
 	
@@ -205,10 +221,58 @@ function deleteRow(){
 			}
 		}
 	}
+
+var empOpenWin;
+
+function empOpenChild(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,
+		posCd,statCd)
+{
 	
+    // window.name = "부모창 이름";
+    window.name = "empParentForm";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+	
+	if(empOpenWin != null)
+	{
+		empOpenWin.close();
+		empOpenWin = null;
+	}
+	
+    empOpenWin = window.open("/user/empEdit",
+        "childForm", "width=570, height=950");
+	
+	empOpenWin.onload = function(){
+        empSetChildText(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,
+        		posCd,statCd);
+		//alert("로딩 완료");
+	}
+    // 일정시간 지연 후 값 넣기
+  /*  setTimeout(function () {
+        empSetChildText(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,
+        		posCd,statCd);
+    }, 350)*/
+}
+
+function empSetChildText(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,
+		posCd,statCd) 
+{
+
+    if (empOpenWin != null) { 
+    	empOpenWin.document.getElementById("orgSeq").value = orgSeq;
+        empOpenWin.document.getElementById("empNm").value = empNm;
+        empOpenWin.document.getElementById("empId").value = empId;
+        empOpenWin.document.getElementById("empEmail").value = empEmail;
+        empOpenWin.document.getElementById("empPhoneNo").value = empPhoneNo;
+        empOpenWin.document.getElementById("emerNo").value = emerNo;
+        empOpenWin.document.getElementById("empJoinDay").value = empJoinDay;
+        empOpenWin.document.getElementById("skillLvCd").value = skillLvCd;
+        empOpenWin.document.getElementById("empDivCd").value = empDivCd;
+        empOpenWin.document.getElementById("posCd").value = posCd;
+        empOpenWin.document.getElementById("statCd").value = statCd;
+    }
+}
 
 
-	
 </script>
 
 </html>
