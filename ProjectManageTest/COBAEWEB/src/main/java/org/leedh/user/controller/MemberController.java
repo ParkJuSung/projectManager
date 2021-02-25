@@ -179,7 +179,6 @@ public class MemberController {
     
     //사원 전체 정보 불러오기
     
- //   @ResponseBody
     @RequestMapping(value = "/empShow", method = RequestMethod.GET)
     public Model empShow(Model model1) throws Exception {
     //public String empShow(Model model) throws Exception {
@@ -202,7 +201,6 @@ public class MemberController {
     }
     
     
-   // @ResponseBody
     @RequestMapping(value = "/empShow", method = RequestMethod.POST)
     public ModelAndView  empShowTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
@@ -249,11 +247,11 @@ public class MemberController {
     public String checkDelete(HttpServletRequest request) throws Exception {
     	
     	
-        String[] ajaxMsg = request.getParameterValues("valueArr");
-
+        String[] ajaxMsg = request.getParameterValues("dataArr");
+        
         for (String s : ajaxMsg) {
 
-            service.deleteEmpAdmin(s);
+            //service.deleteEmpAdmin(s);
             service.deleteEmp(s);
         }
         return "redirect:/user/empShow";

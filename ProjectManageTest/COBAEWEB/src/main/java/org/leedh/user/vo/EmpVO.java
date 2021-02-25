@@ -30,8 +30,8 @@ public class EmpVO {
     private String skillLvCd;
     private String posCd;
     private String statCd;
-//    private String regId;
-//    private String regDt;
+    private String regId;
+    private String regDt;
     private String chgId;
     private String chgDt;
     private boolean rememberEmail;

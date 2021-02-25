@@ -84,8 +84,9 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public void deleteEmpAdmin(String no) {
         sql.delete(NAMESPACE + ".deleteEmpAdmin", no);
-
     }
+    
+    
 }
 
 

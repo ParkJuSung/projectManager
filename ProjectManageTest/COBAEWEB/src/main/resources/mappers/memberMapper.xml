@@ -139,7 +139,7 @@
         DELETE
             FL_EMP
         WHERE
-            NO = #{no}
+            EMP_ID = #{empId}
     </delete>
 
     <delete id="deleteEmpAdmin">
