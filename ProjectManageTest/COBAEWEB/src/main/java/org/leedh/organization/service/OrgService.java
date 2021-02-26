@@ -6,4 +6,7 @@ import org.leedh.organization.vo.OrgVO;
 
 public interface OrgService {
 	List<OrgVO> orgShow() throws Exception;
+	
+    void orgEdit(OrgVO vo) throws Exception;
+
 }

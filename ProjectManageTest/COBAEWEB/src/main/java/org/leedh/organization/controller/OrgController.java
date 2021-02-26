@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.leedh.organization.dao.OrgDAO;
 import org.leedh.organization.service.OrgService;
 import org.leedh.organization.vo.OrgVO;
+import org.leedh.user.vo.EmpVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +47,6 @@ public class OrgController {
     @RequestMapping(value = "/orgShow", method = RequestMethod.GET)
     public Model empShow(Model model1) throws Exception {
     //public String empShow(Model model) throws Exception {
-    	
-    	
     	
     	Model retModel = model1;
     	
@@ -94,5 +93,35 @@ public class OrgController {
 	System.out.println(this.getClass().getName() + " Result --> " + mav);
 	
 	return mav;
+    }
+    
+    @RequestMapping(value = "/orgEdit", method = RequestMethod.GET)
+    public String registerUpdateView(HttpServletRequest request, HttpSession session) throws Exception {
+
+        // url 직접 접근시 로그인 화면으로 리다이렉션 /  session.invalidate()로 세션 소거
+        if (request.getHeader("REFERER") == null) {
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        return "/organization/empEdit";
+    }
+
+    // 회원정보 수정  post
+    @RequestMapping(value = "/orgEdit", method = RequestMethod.POST)
+    public String registerUpdate(OrgVO vo, Model model, HttpServletRequest request, HttpSession session) throws
+            Exception {
+
+        // url 직접 접근시 로그인 화면으로 리다이렉션 /  session.invalidate()로 세션 소거
+        if (request.getHeader("REFERER") == null) {
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        service.orgEdit(vo);
+        model.addAttribute("empEdit", vo);
+        
+        
+        return "/organization/empEdit";
     }
 }

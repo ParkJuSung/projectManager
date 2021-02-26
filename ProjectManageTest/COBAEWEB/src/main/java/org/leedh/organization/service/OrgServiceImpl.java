@@ -25,4 +25,11 @@ public class OrgServiceImpl implements OrgService{
     public List<OrgVO> orgShow() throws Exception{
     	return dao.orgShow();
     }
+    
+    @Override
+    public void orgEdit(OrgVO vo) throws Exception {
+    	
+        //받은 vo를 DAO로 보내줍니다.
+        dao.orgEdit(vo);
+    }
 }

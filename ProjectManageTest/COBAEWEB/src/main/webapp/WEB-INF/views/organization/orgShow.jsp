@@ -152,6 +152,20 @@ function selectData(){
 					pager:"#gridpager",
 					rowNum:15, 
 					multiselect: true,
+					onCellSelect: function(rowId,colId,cellContent,e){
+						//alert("rowID : " + rowId);
+						//alert("colId : " + colId);
+						if(colId!=0)
+						{
+							var rowData = $("#jqGrid").jqGrid('getRowData',rowId);
+							console.log(rowData);
+							orgOpenChild(rowData.orgSeq,rowData.orgCd,rowData.orgNm,rowData.orgDivCd,
+									    rowData.bizNo,rowData.ceoNm,rowData.orgTellNo,
+									    rowData.orgFaxNo,rowData.orgZip,rowData.orgAddr1,rowData.orgAddr2,
+									    rowData.orgSailNm,rowData.orgSailPhone);
+						}
+					},
+					
 			});
 	 }
 }
