@@ -222,6 +222,7 @@ function deleteRow(){
 		}
 	}
 
+// 수정하기 위한 팝업창 열기
 var empOpenWin;
 
 function empOpenChild(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,

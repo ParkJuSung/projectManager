@@ -2,6 +2,7 @@ package org.leedh.user.dao;
 
 import org.leedh.user.vo.EmpVO;
 import java.util.List;
+
 public interface MemberDAO {
 
     // 회원가입

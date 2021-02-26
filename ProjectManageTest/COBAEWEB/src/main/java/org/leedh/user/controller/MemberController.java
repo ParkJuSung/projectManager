@@ -24,9 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Enumeration;
+
 @Controller
 @RequestMapping("/user")
 @Slf4j

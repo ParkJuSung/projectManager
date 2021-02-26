@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrgMapper">
+
+    <!--기관정보 전체 호출 -->
+    <select id="orgShow" parameterType="OrgVO" resultType="OrgVO">
+        SELECT ORG_SEQ       		as orgSeq,
+        	   ORG_CD		 		as orgCd,
+        	   ORG_NM	 			as orgNm,
+               ORG_DIV_CD        	as orgDivCd,
+               BIZ_NO        		as bizNo,
+               CEO_NM     			as ceoNm,
+               ORG_TELL_NO  		as orgTellNo,
+               ORG_FAX_NO       	as orgFaxNo,
+               ORG_ZIP  			as orgZip,
+               ORG_ADDR1   			as orgAddr1,
+               ORG_ADDR2        	as orgAddr2,
+               ORG_SAIL_NM		 	as orgSailNm,
+               ORG_SAIL_PHONE		as orgSailPhone,
+               REG_ID		 		as regId,
+               REG_DT		 		as regDt,
+               CHG_ID		 		as chgId,
+               CHG_DT		 		as chgDt
+        FROM FL_ORG
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
