@@ -178,24 +178,9 @@ public class MemberController {
     //사원 전체 정보 불러오기
     
     @RequestMapping(value = "/empShow", method = RequestMethod.GET)
-    public Model empShow(Model model1) throws Exception {
-    //public String empShow(Model model) throws Exception {
-    	
-    	
-    	
-    	Model retModel = model1;
-    	
-    	System.out.println("/empShow start");
-    	
-        List<EmpVO> empVo = service.empShow();
-        
-        
-        model1.addAttribute("empList", empVo);
-        
-   
-    	System.out.println("/empShow end" + model1);
-        return retModel;
-        //return "/user/empShow";
+    public String empShow() throws Exception {
+
+        return "/user/empShow";
     }
     
     

@@ -152,6 +152,7 @@ function selectData(){
 					pager:"#gridpager",
 					rowNum:15, 
 					multiselect: true,
+					cellEdit:true,
 					onCellSelect: function(rowId,colId,cellContent,e){
 						//alert("rowID : " + rowId);
 						//alert("colId : " + colId);
@@ -206,10 +207,9 @@ function orgSetChildText(orgSeq,orgCd,orgNm,orgDivCd,bizNo,ceoNm,orgTellNo,orgFa
 {
 
     if (orgOpenWin != null) { 
-    	orgOpenWin.document.getElementById("orgSeq").value = orgSeq;
         orgOpenWin.document.getElementById("orgCd").value = orgCd;
         orgOpenWin.document.getElementById("orgNm").value = orgNm;
-        orgOpenWin.document.getElementById("orgDivCd").value = orgNm;
+        orgOpenWin.document.getElementById("orgDivCd").value = orgDivCd;
         orgOpenWin.document.getElementById("bizNo").value = bizNo;
         orgOpenWin.document.getElementById("ceoNm").value = ceoNm;
         orgOpenWin.document.getElementById("orgTellNo").value = orgTellNo;

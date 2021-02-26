@@ -51,7 +51,6 @@
 <script type="text/javascript">
 
 
-
 $(document).ready(function() {
 	jQuery.browser = {};
 	(function () {
@@ -67,8 +66,8 @@ $(document).ready(function() {
 			$("#jqGrid").jqGrid({ 
 				height: 500, 
 				width: 1450, 
-				colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo',
-						  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgId','chgDt'],					
+				colNames : ['직원일련번호','기관일련번호','구분','사번','이름','이메일','핸드폰번호',
+						  '비상연락처','입사일','기술등급','직위','상태','등록자사번','등록일','수정자사번','수정일'],					
 				colModel:[ 
 				{name:"empSeq", index:"empSeq", width:55, align:'left', hidden:false }, 
 				{name:'orgSeq', index : 'orgSeq', width : 55, align : 'left', hidden:false, },
@@ -128,8 +127,8 @@ function selectData(){
 					data: dataArr, 
 					height: 500, 
 					width: 1450, 
-					colNames : ['empSeq','orgSeq','empDivCd','empId','empNm','empEail','empPhoneNo',
-							  'emerNo','empJoinDay','skillLvCd','posCd','statCd','regId','regDt','chgId','chgDt'], 
+					colNames : ['직원일련번호','기관일련번호','구분','사번','이름','이메일','핸드폰번호',
+						  		'비상연락처','입사일','기술등급','직위','상태','등록자사번','등록일','수정자사번','수정일'], 
 					colModel:[ 
 						{name:"empSeq", index:"empSeq", width:55, align:'left', hidden:false }, 
 						{name : 'orgSeq', index : 'orgSeq', width : 55, align : 'left', hidden:false, },
@@ -153,6 +152,7 @@ function selectData(){
 						rowNum:15, 
 						multiselect: true,
 						cellEdit:true,
+						autowidth:true,
 						onCellSelect: function(rowId,colId,cellContent,e){
 							//alert("rowID : " + rowId);
 							//alert("colId : " + colId);
@@ -205,7 +205,7 @@ function deleteRow(){
 					dataArr: dataArr
 				},
 				success:function(response, textStatus, xhr){
-					alert("s." + textStatus);
+				//	alert("s." + textStatus);
 				//	location.replace("empShow")
 					$("#jqGrid").jqGrid('setGridParam',{
 						url: delurl,

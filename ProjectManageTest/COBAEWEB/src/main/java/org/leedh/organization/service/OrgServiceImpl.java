@@ -4,6 +4,7 @@ import org.leedh.organization.dao.OrgDAO;
 import org.leedh.organization.vo.OrgVO;
 import org.leedh.user.dao.MemberDAO;
 import org.leedh.user.service.MemberService;
+import org.leedh.user.vo.EmpVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +32,10 @@ public class OrgServiceImpl implements OrgService{
     	
         //받은 vo를 DAO로 보내줍니다.
         dao.orgEdit(vo);
+    }
+    
+    @Override
+    public void orgRegister(OrgVO vo) throws Exception {
+    	dao.orgRegister(vo);
     }
 }

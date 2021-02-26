@@ -9,4 +9,6 @@ public interface OrgService {
 	
     void orgEdit(OrgVO vo) throws Exception;
 
+    void orgRegister(OrgVO vo) throws Exception;
+
 }

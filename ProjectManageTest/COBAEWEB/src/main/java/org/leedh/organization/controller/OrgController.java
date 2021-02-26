@@ -45,27 +45,14 @@ public class OrgController {
     //기관 전체 정보 불러오기
     
     @RequestMapping(value = "/orgShow", method = RequestMethod.GET)
-    public Model empShow(Model model1) throws Exception {
-    //public String empShow(Model model) throws Exception {
+    public String orgShow() throws Exception {
     	
-    	Model retModel = model1;
-    	
-    	System.out.println("/orgShow start");
-    	
-        List<OrgVO> orgVo = service.orgShow();
-        
-        
-       model1.addAttribute("empList", orgVo);
-        
-   
-    	System.out.println("/orgShow end" + model1);
-        return retModel;
-     //   return "/organization/orgShow";
+        return "/organization/orgShow";
     }
     
     
     @RequestMapping(value = "/orgShow", method = RequestMethod.POST)
-    public ModelAndView  empShowTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView  orgShowTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
     	System.out.println("run /orgShow : " + this.getClass().getName());
 
@@ -104,7 +91,7 @@ public class OrgController {
             return "redirect:/";
         }
 
-        return "/organization/empEdit";
+        return "/organization/orgEdit";
     }
 
     // 회원정보 수정  post
@@ -122,6 +109,40 @@ public class OrgController {
         model.addAttribute("empEdit", vo);
         
         
-        return "/organization/empEdit";
+        return "/organization/orgEdit";
+    }
+    
+    @RequestMapping(value = "/orgRegister", method = RequestMethod.GET)
+    public String getRegister(HttpServletRequest request, HttpSession session) throws Exception {
+
+        // url 직접 접근시 로그인 화면으로 리다이렉션 /  session.invalidate()로 세션 소거
+        if (request.getHeader("REFERER") == null) {
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        log.info("get orgRegister");
+        return "/organization/orgRegister";
+
+    }
+
+    // 회원가입 post
+    @RequestMapping(value = "/orgRegister", method = RequestMethod.POST)
+    public String postRegister(OrgVO vo, HttpSession session, HttpServletRequest request) throws Exception {
+
+        // url 직접 접근시 로그인 화면으로 리다이렉션 /  session.invalidate()로 세션 소거
+        if (request.getHeader("REFERER") == null) {
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        log.info("post orgRegister");
+
+        service.orgRegister(vo);
+            // 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기
+            // 존재하지 않는다면 -> register
+
+
+        return "/project/main";
     }
 }

@@ -26,6 +26,45 @@
         FROM FL_ORG
     </select>
 
+<!-- 기관정보 수정 -->
+	<update id="orgEdit">
+ 	update FL_ORG
+	set ORG_NM				= #{orgNm},
+		ORG_DIV_CD			= #{orgDivCd},
+		CEO_NM				= #{ceoNm},
+		ORG_TELL_NO			= #{orgTellNo},
+		ORG_FAX_NO			= #{orgFaxNo},
+		ORG_ZIP				= #{orgZip},
+		ORG_ADDR1			= #{orgAddr1},
+		ORG_ADDR2			= #{orgAddr2},
+		ORG_SAIL_NM			= #{orgSailNm},
+	    ORG_SAIL_PHONE		= #{orgSailPhone},
+		CHG_ID		 		= '수정자사번',
+		CHG_DT		 		= to_char(sysdate, 'yyyy.mm.dd hh24:mi') 
+		where BIZ_NO = #{bizNo}
+	</update>
+	
+	<insert id="orgRegister">
+    INSERT INTO FL_ORG
+    VALUES(
+   		 SEQ_ORG_NO.NEXTVAL,
+   		 #{orgCd},
+   		 #{orgNm},
+   		 #{orgDivCd},
+    	 #{bizNo},
+    	 #{ceoNm},
+    	 #{orgTellNo},
+    	 #{orgFaxNo},
+   		 #{orgZip},
+   		 #{orgAddr1},
+   		 #{orgAddr2},
+   		 #{orgSailNm},
+   		 #{orgSailPhone},
+    	 '등록자사번',
+   		 to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
+   		 null,
+   		 null)
+    </insert>
 </mapper>
 
 

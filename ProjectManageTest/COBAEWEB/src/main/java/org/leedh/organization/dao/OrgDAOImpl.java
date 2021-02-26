@@ -33,4 +33,9 @@ public class OrgDAOImpl implements OrgDAO{
        
         sql.update(NAMESPACE + ".orgEdit", vo);
     }
+    
+    @Override
+    public void orgRegister(OrgVO vo) throws Exception {
+        sql.insert(NAMESPACE + ".orgRegister", vo);
+    }
 }

@@ -60,7 +60,7 @@
 
                   <div class="collapse" id="collapsePages2" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                           		<a class="nav-link" href="${pageContext.request.contextPath}/organization/orgregister">기관 등록</a>
+                           		<a class="nav-link" href="${pageContext.request.contextPath}/organization/orgRegister">기관 등록</a>
                                 <a class="nav-link" href="${pageContext.request.contextPath}/organization/orgShow">기관 조회</a>
                     
                         </a>

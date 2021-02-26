@@ -29,7 +29,7 @@ public class PjtServiceImpl implements PjtService {
     public void register(PjtVO pjtVO) throws Exception {
 
 
-        String orgC = pjtVO.getPjtOrgC();
+    /*    String orgC = pjtVO.getPjtOrgC();
         String divC = pjtVO.getPjtDivC();
         String pjStC = pjtVO.getPjtStC();
 
@@ -79,7 +79,7 @@ public class PjtServiceImpl implements PjtService {
         pjtVO.setPjtC(settingPjtc);
 
 
-        log.info("프로젝트 코드 : " + pjtVO.getPjtC());
+        log.info("프로젝트 코드 : " + pjtVO.getPjtC());*/
 
         projectDao.register(pjtVO);
     }
@@ -105,7 +105,7 @@ public class PjtServiceImpl implements PjtService {
     @Override
     public void pjtEdit(PjtVO pjtVO) throws Exception {
     	
-        String orgC = pjtVO.getPjtOrgC();
+ /*       String orgC = pjtVO.getPjtOrgC();
         String divC = pjtVO.getPjtDivC();
         String pjStC = pjtVO.getPjtStC();
 
@@ -149,7 +149,7 @@ public class PjtServiceImpl implements PjtService {
             case "OCR":
                 pjtVO.setPjtDivC("A02");
                 break;
-        }
+        }*/
         
         projectDao.pjtEdit(pjtVO);
     }
