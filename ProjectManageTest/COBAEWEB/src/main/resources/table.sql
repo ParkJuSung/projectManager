@@ -108,16 +108,16 @@ CREATE TABLE FL_ORG(
 -- 사번 시퀀스
 CREATE SEQUENCE SEQ_FLEMP_NO --시퀀스이름
     INCREMENT BY 1 -- 증감숫자 1
-    START WITH 10001 -- 시작숫자 1
-    MINVALUE 10001 -- 최소값 1
-    MAXVALUE 99999 -- 최대값 10000
+    START WITH 10001 -- 시작숫자 10001
+    MINVALUE 10001 -- 최소값 10001
+    MAXVALUE 99999 -- 최대값 99999
     NOCYCLE; -- 순환하지않음
     
 CREATE SEQUENCE SEQ_PJT_NO --시퀀스이름
     INCREMENT BY 1 -- 증감숫자 1
-    START WITH 10001 -- 시작숫자 1
-    MINVALUE 10001 -- 최소값 1
-    MAXVALUE 99999 -- 최대값 10000
+    START WITH 10001 -- 시작숫자 10001
+    MINVALUE 10001 -- 최소값 10001
+    MAXVALUE 99999 -- 최대값 99999
     NOCYCLE; -- 순환하지않음
 
 -- 프로시저

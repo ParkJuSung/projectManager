@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.leedh.mapper.ProcMapper">
+
+    <select id="procShow" parameterType="ProcVO" resultType="ProcVO">
+        SELECT PJT_SEQ       			as pjtSeq,
+        	   PROC_CD		 			as procCd,
+        	   PRE_STR_DAY	 			as preStrDay,
+               PRE_END_DAY       		as preEndDay,
+               REL_STR_DAY        		as relStrDay,
+               REL_END_DAY     			as relEndDay,
+               CURR_YN  				as currYn,
+               STAT_CD       			as statCd,
+               REAMARK  				as reamark, 
+               REG_ID		 			as regId,
+               REG_DT		 			as regDt,
+               CHG_ID		 			as chgId,
+               CHG_DT		 			as chgDt
+        FROM FL_PROCESS
+    </select>
+
+<!-- 기관정보 수정 -->
+	<update id="procEdit">
+ 	update FL_PROCESS
+	set PRE_STR_DAY		= #{preStrDay},
+		PRE_END_DAY  	= #{preEndDay},
+		REL_STR_DAY  	= #{relStrDay},
+		REL_END_DAY  	= #{relEndDay},
+		CURR_YN  		= #{currYn},
+		STAT_CD      	= #{statCd},
+		REAMARK  		= #{reamark},
+		CHG_ID		 		= '수정자사번',
+		CHG_DT		 		= to_char(sysdate, 'yyyy.mm.dd hh24:mi') 
+		where BIZ_NO = #{bizNo}
+	</update>
+	
+	<insert id="procRegister">
+    INSERT INTO FL_PROCESS
+    VALUES(
+   		 SEQ_ORG_NO.NEXTVAL, <!-- 프로세스 상태를 나타낼 프로젝트 일련번호가 들어갈 예정--> 
+   		 #{procCd},
+   		 #{preStrDay},
+   		 #{preEndDay},
+    	 #{relStrDay},
+    	 #{relEndDay},
+    	 #{currYn},
+    	 #{statCd},
+   		 #{reamark},
+    	 '등록자사번',
+   		 to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
+   		 null,
+   		 null)
+    </insert>
+
+</mapper>
