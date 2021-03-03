@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <label class="small mb-1" for="pjtSeq">프로젝트일련번호</label>
                                         <input class="form-control py-4" id="pjtSeq" name="pjtSeq" type="text"
-                                               placeholder="프로젝트일련번호 입력" readoney />
+                                               placeholder="프로젝트일련번호 입력" readonly />
                                     </div>
                                     
                                     <div class="form-group">
@@ -105,6 +105,30 @@
                                         </div>
 									</div>
 									
+									<div class=form-group">
+                                        <label class="small mb-1" for="regId">등록자 사번</label> <input
+                                            class="form-control py-4" id="regId" name="regId" type="text"
+                                             readonly/>
+                                    </div>
+                                    
+                                    <div class=form-group">
+                                        <label class="small mb-1" for="regDt">등록일</label> <input
+                                            class="form-control py-4" id="regDt" name="regDt" type="text"
+                                             readonly/>
+                                    </div>
+                                    
+                                   <div class=form-group">
+                                        <label class="small mb-1" for="chgId">수정자사번</label> <input
+                                            class="form-control py-4" id="chgId" name="chgId" type="text"
+                                             readonly/>
+                                    </div>                                
+                                    
+                                    <div class=form-group">
+                                        <label class="small mb-1" for="chgDt">수정일</label> <input
+                                            class="form-control py-4" id="chgDt" name="chgDt" type="text"
+                                            readonly/>
+                                    </div>
+                                    
                                     <div style="text-align: center;">
                                         <button type="submit" class="btn btn-primary">수정</button>
                                     </div>

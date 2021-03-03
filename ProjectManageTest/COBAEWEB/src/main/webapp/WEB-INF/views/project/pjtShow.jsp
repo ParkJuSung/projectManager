@@ -198,6 +198,7 @@ function pjtSetChildText(pjtSeq,pjtCd,pjtNm,orgSeq,preStrDay,preEndDay,relStrDay
 {
 
     if (pjtOpenWin != null) { 
+    	 pjtOpenWin.document.getElementById("pjtSeq").value = pjtSeq;
         pjtOpenWin.document.getElementById("pjtCd").value = pjtCd;
         pjtOpenWin.document.getElementById("pjtNm").value = pjtNm;
         pjtOpenWin.document.getElementById("orgSeq").value = orgSeq;

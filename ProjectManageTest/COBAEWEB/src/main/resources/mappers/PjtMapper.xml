@@ -46,7 +46,7 @@
 
 	<!--  프로젝트 수정 -->
 	<update id="pjtEdit">
- 	update FL_EMP
+ 	update FL_PJT
 	set PJT_CD			= #{pjtCd},
 		PJT_NM			= #{pjtNm},
 		ORG_SEQ			= #{orgSeq},
@@ -60,10 +60,6 @@
 		where PJT_SEQ = #{pjtSeq}
 	</update>
 	
-    
-
-
-
     <!--  프로젝트 삭제  -->
     <delete id="deletePjtCode">
         DELETE
