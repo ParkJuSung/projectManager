@@ -22,9 +22,9 @@
 
 
 <%--jqGrid  --%>
-<link href="/resources/plugin/css/jquery-ui-themes-1.12.1/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<link href="/resources/plugin/css/jquery-ui-themes-1.12.1/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
-<link href="/resources/plugin/css/jquery-ui-themes-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid-4.4.3/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid-4.4.3/grid.locale-kr.js"></script> 
-<script type="text/javascript" src="/resources/plugin/js/jquery.jqGrid-4.4.3/jquery.jqGrid.min.js"></script> 
+<link href="${pageContext.request.contextPath}/resources/plugin/css/jquery-ui-themes-1.12.1/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/resources/plugin/css/jquery-ui-themes-1.12.1/ui.jqgrid.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/resources/plugin/css/jquery-ui-themes-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/js/jquery.jqGrid-4.4.3/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/js/jquery.jqGrid-4.4.3/grid.locale-kr.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/js/jquery.jqGrid-4.4.3/jquery.jqGrid.min.js"></script> 

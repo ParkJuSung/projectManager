@@ -1,6 +1,8 @@
 package org.leedh.project.controller;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.leedh.organization.vo.OrgVO;
 import org.leedh.project.service.PjtService;
 import org.leedh.project.vo.PjtVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -66,7 +70,43 @@ public class PjtController {
 
     //프로젝트 조회(전체)
     @RequestMapping(value = "/pjtShow", method = RequestMethod.GET)
-    public String pjt(HttpServletRequest request, HttpSession session, Model model) throws Exception {
+    public String pjt() throws Exception {
+        return "/project/pjtShow";
+    }
+    
+    @RequestMapping(value = "/pjtShow", method = RequestMethod.POST)
+    public ModelAndView  pjtShowTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	
+    	System.out.println("run /orgShow : " + this.getClass().getName());
+
+
+    ModelAndView mav = new ModelAndView("jsonView");
+    List<PjtVO> pjtList = null;
+    PjtVO orgVo = new PjtVO();
+
+    try {
+    	pjtList = (List<PjtVO>) pjtService.pjtShow();
+
+        if (pjtList == null) {
+            mav.addObject("result", "1");
+        } else {
+            mav.addObject("result", "0");
+            mav.addObject("records", pjtList.size());
+            mav.addObject("rows", pjtList);
+        }
+
+    } catch (Exception e) {
+    	System.out.println(this.getClass().getName() + " --> Select Error.");
+    	System.out.println(this.getClass().getName() + " Select Error." + e.getMessage());
+    }
+    
+	System.out.println(this.getClass().getName() + " Result --> " + mav);
+	
+	return mav;
+    }
+    
+    @RequestMapping(value = "/orgEdit", method = RequestMethod.GET)
+    public String registerUpdateView(HttpServletRequest request, HttpSession session) throws Exception {
 
         // url 직접 접근시 로그인 화면으로 리다이렉션 /  session.invalidate()로 세션 소거
         if (request.getHeader("REFERER") == null) {
@@ -74,11 +114,9 @@ public class PjtController {
             return "redirect:/";
         }
 
-        List<PjtVO> pjtVo = pjtService.pjtShow();
-        model.addAttribute("pjtList", pjtVo);
-        return "/project/pjtShow";
+        return "/organization/orgEdit";
     }
-
+    
     //프로젝트 수정
     @RequestMapping(value = "/pjtEdit", method = RequestMethod.GET)
     public String pjtEditGET(HttpServletRequest request, HttpSession session) throws Exception {

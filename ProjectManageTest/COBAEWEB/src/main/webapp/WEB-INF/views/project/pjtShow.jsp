@@ -12,6 +12,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Focusleader Project Manager</title>
+      
 </head>
 <body class="sb-nav-fixed">
 
@@ -24,217 +25,193 @@
     <c:import url="/WEB-INF/views/include/side.jsp"/>
 
     <div id="layoutSidenav_content">
+
         <main>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    프로젝트 정보
+                    프로젝트정보
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <td><b><input id="allCheck" type="checkbox" name="allCheck"/></b></td>
-                                <td><b>프로젝트 코드</b></td>
-                                <td><b>상태분류</b></td>
-                                <td><b>프로젝트 분류</b></td>
-                                <td><b>기관코드</b>
-                                <td><b>고객명</b></td>
-                                <td><b>프로젝트 명</b></td>
-                                <td><b>투입인원</b></td>
-                                <td><b>관리자명</b></td>
-                                <td><b>시작일</b></td>
-                                <td><b>종료일</b></td>
-                                <td><b>종료여부</b></td>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            
-                            
-                            <c:forEach var="pjtList" items="${pjtList}" varStatus="vs">
-                                <tr onclick="pjtOpenChild('${pjtList.pjtC}',
-                                        '${pjtList.pjtClient}',
-                                        '${pjtList.pjtStC}',
-                                        '${pjtList.pjtDivC}',
-                                        '${pjtList.pjtOrgC}',
-                                        '${pjtList.pjtNm}',
-                                        '${pjtList.pjtEmpList}',
-                                        '${pjtList.pjtPm}',
-                                        '${pjtList.pjtStartDate}', 
-                                        '${pjtList.pjtEndDate}',
-                                        '${pjtList.pjtEndYn}');"
-                                    onmouseover="this.style.backgroundColor='#9FB6FF'"
-                                    onmouseout="this.style.backgroundColor=''"
-                                    style="cursor:pointer">
-                                    <td class="checkbox" onclick="event.cancelBubble=true;">
-                                        <input name="RowCheck" type="checkbox" value="${pjtList.no}"/>
-                                    </td>
-                                    <td><c:out value="${pjtList.pjtC}"/></td>
-                                    <c:choose>
-                                        <c:when test="${pjtList.pjtStC  == 'B00'}">
-                                            <td>시작예정</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtStC  == 'B01'}">
-                                            <td>기획</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtStC  == 'B02'}">
-                                            <td>개발</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtStC  == 'B03'}">
-                                            <td>테스트</td>
-                                        </c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${pjtList.pjtDivC  == 'A01'}">
-                                            <td>ECM</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtDivC  == 'A02'}">
-                                            <td>OCR</td>
-                                        </c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${pjtList.pjtOrgC  == '001'}">
-                                            <td>한국은행</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtOrgC  == '002'}">
-                                            <td>산업은행</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtOrgC  == '003'}">
-                                            <td>기업은행</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtOrgC  == '004'}">
-                                            <td>KB국민은행</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtOrgC  == '005'}">
-                                            <td>수협은행</td>
-                                        </c:when>
-                                    </c:choose>
-                                    <td><c:out value="${pjtList.pjtClient}"/></td>
-                                    <td><c:out value="${pjtList.pjtNm }"/></td>
-                                    <td><c:out value="${pjtList.pjtEmpList }"/></td>
-                                    <td><c:out value="${pjtList.pjtPm }"/></td>
-                                    <td><c:out value="${pjtList.pjtStartDate }"/></td>
-                                    <td><c:out value="${pjtList.pjtEndDate }"/></td>
-                                    <c:choose>
-                                        <c:when test="${pjtList.pjtEndYn  == '0'}">
-                                            <td>종료</td>
-                                        </c:when>
-                                        <c:when test="${pjtList.pjtEndYn  == '1'}">
-                                            <td>진행중</td>
-                                        </c:when>
-                                    </c:choose>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <div>
-                            <p>프로젝트 정보 수정 시 테이블을 클릭해주세요</p>
-                            <input type="button" value="삭제" class="btn btn-primary" onclick="pjtDeleteValue()">
-                        </div>
-                    </div>
+					<table id="jqGrid"></table> 
+					<div id="gridpager"></div>
+					<div>
+				  <!--  <input type="button" value="삭제" class="btn btn-primary" onclick="deleteRow()">-->
+						<input type="button" value="조회" class="btn btn-primary" onclick="selectData()">
+					</div>
                 </div>
             </div>
         </main>
-
         <!-- 하단 사이드 메뉴 부분 -->
         <c:import url="/WEB-INF/views/include/bottom.jsp"/>
-
     </div>
 </div>
+</body>
 
-<script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	jQuery.browser = {};
+	(function () {
+	    jQuery.browser.msie = false;
+	    jQuery.browser.version = 0;
+	    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+	        jQuery.browser.msie = true;
+	        jQuery.browser.version = RegExp.$1;
+	    }
+	})();
+
+		//단순히 그리드 그리기
+			$("#jqGrid").jqGrid({ 
+				height: 500, 
+				width: 1450, 
+				colNames : ['일련번호','프로젝트코드','프로젝트명','기관코드','예상시작일','예상종료일','실제시작일',
+						  '실제종료일','프로젝트상태','등록자','등록일시','수정자','수정일시'],					
+				colModel:[ 
+				{name:"pjtSeq", index:"pjtSeq", width:55, align:'left', hidden:false }, 
+				{name:'pjtCd', index : 'pjtCd', width : 55, align : 'left', hidden:false, },
+				{name:'pjtNm', index:'pjtNm', width:75, align:'left', hidden:false },
+				{name:'orgSeq', index:'orgSeq', width:70, align:'left', hidden:false },
+				{name:'preStrDay', index:'preStrDay', width:60, align:'center', hidden:false },
+				{name:'preEndDay', index:'preEndDay', width:150, align:'center', hidden:false },
+				{name:'relStrDay', index:'relStrDay', width:90, align:'center', hidden:false },
+				{name:'relEndDay', index:'relEndDay', width:90, align:'center', hidden:false },
+				{name:'pjtStatCd', index:'pjtStatCd', width:90, align:'center', hidden:false },
+				{name:'regId', index:'regId', width:90, align:'center', hidden:false },
+				{name:'regDt', index:'regDt', width:90, align:'center', hidden:false },
+				{name:'chgId', index:'chgId', width:90, align:'center', hidden:false },
+				{name:'chgDt', index:'chgDt', width:90, align:'left', hidden:false }],
+					loadtext: "로딩중일때 표시되는 텍스트!", 
+					caption: "기관 목록", 
+					pager:"#gridpager",
+					rowNum:15, 
+					multiselect: true,
+			});
+});
+
+function selectData(){
+	
+	var url = '/project/pjtShow';
+	
+	//값가져오기
+	 $.ajax({
+		url: url,
+		dataType: 'json',
+		type : 'POST',
+		success : function(data) {
+		//	alert("Success!!!!");
+		//	console.log(data);
+		//	console.log(data.rows[0].emerNo);
+			fn_listSuccess(data);
+      },
+      error : function(request, status, error) {
+          alert("에러가 발생했습니다. 관리자에게 문의하시기 바랍니다");
+      //    alert(request);
+      //    console.log(request);
+          alert(request.status,status);
+          //zAjax.fn_error('getTest.do', request, status, error);
+      }
+	})
+	
+	//그리기
+	function fn_listSuccess(data){
+		 var dataArr = data.rows;
+		 console.log(dataArr);
+		 $("#jqGrid").jqGrid("GridUnload");
+			$("#jqGrid").jqGrid({ 
+				datatype: "local", 
+				data: dataArr, 
+				height: 500, 
+				width: 1450, 
+				colNames : ['일련번호','프로젝트코드','프로젝트명','기관코드','예상시작일','예상종료일','실제시작일',
+						  '실제종료일','프로젝트상태','등록자','등록일시','수정자','수정일시'],					
+				colModel:[ 
+				{name:"pjtSeq", index:"pjtSeq", width:55, align:'left', hidden:false }, 
+				{name:'pjtCd', index : 'pjtCd', width : 55, align : 'left', hidden:false, },
+				{name:'pjtNm', index:'pjtNm', width:75, align:'left', hidden:false },
+				{name:'orgSeq', index:'orgSeq', width:70, align:'left', hidden:false },
+				{name:'preStrDay', index:'preStrDay', width:60, align:'center', hidden:false },
+				{name:'preEndDay', index:'preEndDay', width:150, align:'center', hidden:false },
+				{name:'relStrDay', index:'relStrDay', width:90, align:'center', hidden:false },
+				{name:'relEndDay', index:'relEndDay', width:90, align:'center', hidden:false },
+				{name:'pjtStatCd', index:'pjtStatCd', width:90, align:'center', hidden:false },
+				{name:'regId', index:'regId', width:90, align:'center', hidden:false },
+				{name:'regDt', index:'regDt', width:90, align:'center', hidden:false },
+				{name:'chgId', index:'chgId', width:90, align:'center', hidden:false },
+				{name:'chgDt', index:'chgDt', width:90, align:'left', hidden:false }],
+					loadtext: "로딩중일때 표시되는 텍스트!", 
+					caption: "기관 목록", 
+					pager:"#gridpager",
+					rowNum:15, 
+					multiselect: true,
+					cellEdit:true,
+					onCellSelect: function(rowId,colId,cellContent,e){
+						//alert("rowID : " + rowId);
+						//alert("colId : " + colId);
+						if(colId!=0)
+						{
+							var rowData = $("#jqGrid").jqGrid('getRowData',rowId);
+							console.log(rowData);
+							pjtOpenChild(rowData.pjtSeq,rowData.pjtCd,rowData.pjtNm,rowData.orgSeq,
+									    rowData.preStrDay,rowData.preEndDay,rowData.relStrDay,
+									    rowData.relEndDay,rowData.pjtStatCd,rowData.regId,rowData.regDt,
+									    rowData.chgId,rowData.chgDt);
+						}
+					},
+			});
+	 }
+}
 
 var pjtOpenWin;
 
-function pjtOpenChild(pjtC, pjtClient, pjtNm, pjtEmpList,
-                      pjtPm, pjtStartDate, pjtEndDate, pjtEndYn, pjtStC, pjtDivC, pjtOrgC) {
-
+function pjtOpenChild(pjtSeq,pjtCd,pjtNm,orgSeq,preStrDay,preEndDay,relStrDay,relEndDay,pjtStatCd,
+		regId,regDt,chgId,chgDt)
+{
+	
     // window.name = "부모창 이름";
-    window.name = "pjtParentForm";
+    window.name = "orgParentForm";
     // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-
+	
+	if(pjtOpenWin != null)
+	{
+		pjtOpenWin.close();
+		pjtOpenWin = null;
+	}
+	
     pjtOpenWin = window.open("/project/pjtEdit",
-        "childForm", "width=570, height=950");
-
+        "orgChildForm", "width=900, height=950");
+	
+    pjtOpenWin.onload = function(){
+    	pjtSetChildText(pjtSeq,pjtCd,pjtNm,orgSeq,preStrDay,preEndDay,relStrDay,relEndDay,pjtStatCd,
+        		regId,regDt,chgId,chgDt);
+		//alert("로딩 완료");
+	}
     // 일정시간 지연 후 값 넣기
-    
-   	pjtOpenWin.onload = function(){
-   	 pjtSetChildText(pjtC, pjtClient, pjtNm, pjtEmpList,
-             pjtPm, pjtStartDate, pjtEndDate, pjtEndYn, pjtStC, pjtDivC, pjtOrgC);
-   	}
-    
-/*    setTimeout(function () {
-        pjtSetChildText(pjtC, pjtClient, pjtNm, pjtEmpList,
-            pjtPm, pjtStartDate, pjtEndDate, pjtEndYn, pjtStC, pjtDivC, pjtOrgC);
+  /*  setTimeout(function () {
+        empSetChildText(orgSeq,empNm,empId,empEmail,empPhoneNo,emerNo,empJoinDay,skillLvCd,empDivCd,
+        		posCd,statCd);
     }, 350)*/
 }
 
-function pjtSetChildText(pjtC, pjtClient , pjtStC , pjtDivC, pjtOrgC ,pjtNm, pjtEmpList,
-                         pjtPm, pjtStartDate, pjtEndDate, pjtEndYn) {
+function pjtSetChildText(pjtSeq,pjtCd,pjtNm,orgSeq,preStrDay,preEndDay,relStrDay,relEndDay,pjtStatCd,
+		regId,regDt,chgId,chgDt) 
+{
 
-
-        switch (pjtOrgC) {
-            case "001":
-                pjtOrgC ="한국은행";
-                break;
-            case "002":
-                pjtOrgC ="산업은행";
-                break;
-            case "003":
-                pjtOrgC ="기업은행";
-                break;
-            case "004":
-                pjtOrgC = "KB국민은행";
-                break;
-            case "005":
-                pjtOrgC = "수협은행";
-                break;
-        }
-
-        switch (pjtStC) {
-            case "B00":
-                pjtStC = "시작예정";
-                break;
-            case "B01":
-                pjtStC = "기획";
-                break;
-            case "B02":
-                pjtStC = "개발";
-                break;
-            case "B03":
-                pjtStC = "테스트";
-                break;
-        }
-
-        switch (pjtDivC) {
-            case "A01":
-                pjtDivC = "ECM";
-                break;
-            case "A02":
-                pjtDivC = "OCR";
-                break;
-        }
-        
-        
-    if (pjtOpenWin != null) {
-        pjtOpenWin.document.getElementById("pjtC").value = pjtC;
-        pjtOpenWin.document.getElementById("pjtClient").value = pjtClient;
-        pjtOpenWin.document.getElementById("pjtStC").value = pjtStC;
-        pjtOpenWin.document.getElementById("pjtDivC").value = pjtDivC;
-        pjtOpenWin.document.getElementById("pjtOrgC").value = pjtOrgC;
+    if (pjtOpenWin != null) { 
+        pjtOpenWin.document.getElementById("pjtCd").value = pjtCd;
         pjtOpenWin.document.getElementById("pjtNm").value = pjtNm;
-        pjtOpenWin.document.getElementById("pjtEmpList").value = pjtEmpList;
-        pjtOpenWin.document.getElementById("pjtPm").value = pjtPm;
-        pjtOpenWin.document.getElementById("pjtStartDate").value = pjtStartDate;
-        pjtOpenWin.document.getElementById("pjtEndDate").value = pjtEndDate;
-        pjtOpenWin.document.getElementById("pjtEndYn").value = pjtEndYn;
-
-
+        pjtOpenWin.document.getElementById("orgSeq").value = orgSeq;
+        pjtOpenWin.document.getElementById("preStrDay").value = preStrDay;
+        pjtOpenWin.document.getElementById("preEndDay").value = preEndDay;
+        pjtOpenWin.document.getElementById("relStrDay").value = relStrDay;
+        pjtOpenWin.document.getElementById("relEndDay").value = relEndDay;
+        pjtOpenWin.document.getElementById("pjtStatCd").value = pjtStatCd;
+        pjtOpenWin.document.getElementById("regId").value = regId;
+        pjtOpenWin.document.getElementById("regDt").value = regDt;
+        pjtOpenWin.document.getElementById("chgId").value = chgId;
+        pjtOpenWin.document.getElementById("chgDt").value = chgDt;
     }
-
 }
 </script>
-</body>
+
 </html>

@@ -10,20 +10,18 @@
 
        INSERT INTO FL_PJT
        VALUES(SEQ_PJT_NO.NEXTVAL,
-       		  #{pjtSeq},
        		  #{pjtCd},
        		  #{pjtNm},
        		  #{orgSeq},
        		  #{preStrDay},
        		  #{preEndDay},
-       		  #{relStrDay},
-       		  #{relEndDay},
+       		  null,
+       		  null,
        		  #{pjtStatCd},
        		  '등록자사번',
        		  to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
    			  null,
-   		 	  null)
-       )   
+   		 	  null)   
     </insert>
 
 
@@ -46,13 +44,24 @@
     FROM FL_PJT
     </select>
 
-    <!--  프로젝트 수정 -->
-    <select id="pjtEdit" statementType="CALLABLE" parameterType="PjtVO" resultType="PjtVO">
-		{
-            CALL P_UPDATE_PJT(#{pjtC},#{pjtDivC}, #{pjtOrgC},
-                              #{pjtStC}, #{pjtEmpList}, #{pjtPm}, #{pjtStartDate}, #{pjtEndDate}, #{pjtEndYn})
-        }
-    </select>
+	<!--  프로젝트 수정 -->
+	<update id="pjtEdit">
+ 	update FL_EMP
+	set PJT_CD			= #{pjtCd},
+		PJT_NM			= #{pjtNm},
+		ORG_SEQ			= #{orgSeq},
+		PRE_STR_DAY		= #{preStrDay},
+		PRE_END_DAY		= #{preEndDay},
+		REL_STR_DAY		= #{relStrDay},
+		REL_END_DAY		= #{relEndDay},
+		PJT_STAT_CD		= #{pjtStatCd},
+		CHG_ID			= '수정자사번ID',
+	    CHG_DT			= to_char(sysdate, 'yyyy.mm.dd hh24:mi')
+		where PJT_SEQ = #{pjtSeq}
+	</update>
+	
+    
+
 
 
     <!--  프로젝트 삭제  -->
