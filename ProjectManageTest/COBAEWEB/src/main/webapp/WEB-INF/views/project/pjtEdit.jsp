@@ -25,7 +25,7 @@
                     <div class="col-lg-7">
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header">
-                                <h3 class="text-center font-weight-light my-2">프로젝트 정보</h3>
+                                <h3 class="text-center font-weight-light my-2">프로젝트 수정</h3>
                             </div>
                             <div class="card-body">
                                 <form id="pjedit" action="${pageContext.request.contextPath}/project/pjtEdit"

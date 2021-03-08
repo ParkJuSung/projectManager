@@ -81,7 +81,7 @@ public class ProcController {
             return "redirect:/";
         }
 
-        return "/proc/procEdit";
+        return "/process/procEdit";
     }
 
     // 회원정보 수정  post
@@ -99,7 +99,7 @@ public class ProcController {
         model.addAttribute("procEdit", vo);
         
         
-        return "/proc/procEdit";
+        return "/process/procEdit";
     }
     
     @RequestMapping(value = "/procRegister", method = RequestMethod.GET)
@@ -112,7 +112,7 @@ public class ProcController {
         }
 
         log.info("get procRegister");
-        return "/proc/procRegister";
+        return "/process/procRegister";
 
     }
 

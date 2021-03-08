@@ -12,7 +12,7 @@
           content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Focusleader Project Manager 기관 등록</title>
+    <title>Focusleader Project Manager 프로세스 등록</title>
 
 </head>
 <body class="bg-primary">
@@ -35,15 +35,15 @@
                             <div class="form-row">
                              	<div class="col-md-6">
                                 	<div class="form-group">
-                                     	<label class="small mb-1" for="procStrDay">프로세스 예상 시작일</label>
-                                         <input class="form-control py" type='date' id='procStrDay' name="procStrDay">
+                                     	<label class="small mb-1" for="preStrDay">프로세스 예상 시작일</label>
+                                         <input class="form-control py" type='date' id='preStrDay' name="preStrDay">
                                      </div>
                                 </div>
                                  <div class="col-md-6">
                                       <div class="form-group">
-                                          <label class="small mb-1" for="procEndDay">프로세스 예상 종료일</label>
-                                           <input class="form-control py" type='date' id='procEndDay'
-                                                       name="procEndDay">
+                                          <label class="small mb-1" for="preEndDay">프로세스 예상 종료일</label>
+                                           <input class="form-control py" type='date' id='preEndDay'
+                                                       name="preEndDay">
                                        </div>
                                  </div>
 							</div>                                
@@ -68,13 +68,11 @@
                                   </select>
                             </div>
                             
-                             <div class="col-md-6">
                                   <div class="form-group">
                                       <label class="small mb-1" for="reamark">비고</label>
                                        <input class="form-control py" type='text' id='reamark' name="reamark">
                                   </div>
-                             </div>
-                                 
+
                                 <div class="form-group">
                                     <label class="small mb-1" for="orgDivCd">기관구분</label>
                                   		<select class="form-control py" id="orgDivCd" name="orgDivCd"

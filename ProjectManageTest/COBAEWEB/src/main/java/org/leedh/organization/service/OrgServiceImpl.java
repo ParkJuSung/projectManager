@@ -2,9 +2,7 @@ package org.leedh.organization.service;
 
 import org.leedh.organization.dao.OrgDAO;
 import org.leedh.organization.vo.OrgVO;
-import org.leedh.user.dao.MemberDAO;
 import org.leedh.user.service.MemberService;
-import org.leedh.user.vo.EmpVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
