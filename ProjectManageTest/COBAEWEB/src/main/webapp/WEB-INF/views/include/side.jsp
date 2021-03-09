@@ -81,6 +81,21 @@
                     </nav>
                 </div>
                 
+                
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                   aria-expanded="false" aria-controls="collapsePages">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    프로젝트 참여자
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                
+                <div class="collapse" id="collapsePages3" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                           		<a class="nav-link" href="${pageContext.request.contextPath}/process/procRegister">프로젝트참여자 등록</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/process/procShow">프로젝트참여자 조회</a>
+                    </nav>
+                </div>
+                
                 <div class="sb-sidenav-menu-heading">Addons</div>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
